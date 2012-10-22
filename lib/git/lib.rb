@@ -674,8 +674,10 @@ module Git
     
     def command(cmd, opts = [], chdir = true, redirect = '', &block)
       ENV['GIT_DIR'] = @git_dir
-      ENV['GIT_INDEX_FILE'] = @git_index_file
-      ENV['GIT_WORK_TREE'] = @git_work_dir
+	  if cmd != "submodule"
+      	ENV['GIT_INDEX_FILE'] = @git_index_file
+      	ENV['GIT_WORK_TREE'] = @git_work_dir
+	  end
       path = @git_work_dir || @git_dir || @path
 
       opts = [opts].flatten.map {|s| escape(s) }.join(' ')
