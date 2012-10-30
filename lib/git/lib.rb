@@ -499,9 +499,12 @@ module Git
       command('checkout', arr_opts)
     end
     
-    def merge(branch, message = nil)      
+    def merge(branch, message = nil, options=[])      
       arr_opts = []
       arr_opts << '-m' << message if message
+      options.each do |opt|
+        arr_opts << opt
+      end
       arr_opts += [branch]
       command('merge', arr_opts)
     end
